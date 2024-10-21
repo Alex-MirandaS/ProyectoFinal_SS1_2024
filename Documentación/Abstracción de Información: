@@ -1,0 +1,19 @@
+Abstracción de Información:
+
+OBJETOS/TABLAS:
+	- Usuario (id, nombre, apellido, username, password, idRol)
+	- Rol (id, rol)
+	- Artículo (id, título, precio, imagen, idEstado, idTipoArticulo, descripción, idUsuario, idProveedor)
+	- Proveedores (id, nombre)
+	- TipoArticulo (id, título) / (Producto, Servicio)
+	- Categoria (id, categoria)
+	- Estado (id, estado) / (NUEVO, USADO - Como Nuevo, USADO - Buen estado, USADO - aceptable)
+	- ArtículoCategoría ( idCategoría, idArtículo)
+	- ShopBag (idUsuario, idArtículo, Monto, Seleccionado(Boolean))
+	- Orden (id, idUsuario, fecha, total, status)
+	- DetalleOrden(idOrden, idProducto, Monto)
+
+VISTAS:
+	-Usuario
+		
+	-Administrador
