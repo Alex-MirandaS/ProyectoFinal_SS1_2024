@@ -12,6 +12,9 @@ const EstadoRoutes = require('./routes/EstadoRoutes');
 const ArticuloRoutes = require('./routes/ArticuloRoutes');
 const ArticuloCategoriaRoutes = require('./routes/ArticuloCategoriaRoutes');
 const ShopBagRoutes = require('./routes/ShopBagRoutes');
+const EstadoOrdenRoutes = require('./routes/EstadoOrdenRoutes');
+const OrdenRoutes = require('./routes/OrdenRoutes');
+const DetalleOrdenRoutes = require('./routes/DetalleOrdenRoutes');
 const app = express();
 
 app.use(express.json());
@@ -27,6 +30,9 @@ app.use('/api', EstadoRoutes);
 app.use('/api', ArticuloRoutes);
 app.use('/api', ArticuloCategoriaRoutes);
 app.use('/api', ShopBagRoutes);
+app.use('/api', EstadoOrdenRoutes);
+app.use('/api', OrdenRoutes);
+app.use('/api', DetalleOrdenRoutes);
 app.listen(3000);
 console.log('EL SERVIDOR SE INICIO EN EL PUERTO 3000');
 

@@ -60,6 +60,12 @@ class GlobalService {
                 return new ArticuloCategoria(data.idCategoria, data.idArticulo);
             case 'ShopBag':
                 return new ShopBag(data.idUsuario, data.idArticulo, data.cantidad, data.seleccionado);
+            case 'EstadoOrden':
+                return new EstadoOrden(data.estado, data.descripcion);
+            case 'Orden':
+                return new Orden(null, data.idUsuario, data.total, data.idEstadoOrden);
+            case 'DetalleOrden':
+                return new DetalleOrden(data.idOrden, data.idProducto, data.cantidad)
         }
     }
 }

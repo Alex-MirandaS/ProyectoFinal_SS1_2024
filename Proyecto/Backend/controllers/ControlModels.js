@@ -9,8 +9,8 @@ const fieldsArray = {
   Categoria: ['categoria'],
   ArticuloCategoria: ['idCategoria', 'idArticulo'],
   ShopBag: ['idUsuario', 'idArticulo', 'cantidad', 'seleccionado'],
-  EstadoOrden: ['estado'],
-  Orden: ['idUsuario', 'fecha', 'total', 'idEstadoOrden'],
+  EstadoOrden: ['estado', 'descripcion'],
+  Orden: ['idUsuario', 'total', 'idEstadoOrden'],
   DetalleOrden: ['idOrden', 'idProducto', 'cantidad']
 };
 

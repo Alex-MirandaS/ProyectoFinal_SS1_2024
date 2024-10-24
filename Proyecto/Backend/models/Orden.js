@@ -1,10 +1,9 @@
 const db = require('../db/db');
 
 class Orden {
-  constructor(id, idUsuario, fecha, total, idEstadoOrden) {
+  constructor(id, idUsuario, total, idEstadoOrden) {
     this.id = id;
     this.idUsuario = idUsuario;
-    this.fecha = fecha;
     this.total = total;
     this.idEstadoOrden = idEstadoOrden;
   }
