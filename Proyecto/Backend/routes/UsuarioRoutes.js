@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const UsuarioS = require('../services/RolService');
+const UsuarioS = require('../services/UsuarioService');
 const UsuarioService = new UsuarioS();
 
 // Crear un nuevo usuario

@@ -107,7 +107,33 @@ CREATE TABLE DetalleOrden (
     FOREIGN KEY (idProducto) REFERENCES Articulo(id)
 );
 
--- Datos iniciales para Rol, Estado y TipoArticulo
+-- Datos Iniciales 
 INSERT INTO Rol (rol) VALUES ('Admin'), ('Cliente'), ('Proveedor');
+
 INSERT INTO Estado (estado) VALUES ('NUEVO'), ('USADO - Como Nuevo'), ('USADO - Buen estado'), ('USADO - aceptable');
+
 INSERT INTO TipoArticulo (titulo) VALUES ('Producto'), ('Servicio');
+
+INSERT INTO Proveedores (nombre) VALUES ('Apple');
+INSERT INTO Proveedores (nombre) VALUES ('Samsung');
+INSERT INTO Proveedores (nombre) VALUES ('Sony');
+INSERT INTO Proveedores (nombre) VALUES ('Microsoft');
+INSERT INTO Proveedores (nombre) VALUES ('Intel');
+INSERT INTO Proveedores (nombre) VALUES ('LG');
+INSERT INTO Proveedores (nombre) VALUES ('Dell');
+INSERT INTO Proveedores (nombre) VALUES ('HP');
+INSERT INTO Proveedores (nombre) VALUES ('Lenovo');
+INSERT INTO Proveedores (nombre) VALUES ('Asus');
+
+INSERT INTO Categoria (categoria) VALUES ('Electrónica');
+INSERT INTO Categoria (categoria) VALUES ('Ropa');
+INSERT INTO Categoria (categoria) VALUES ('Alimentos');
+INSERT INTO Categoria (categoria) VALUES ('Muebles');
+INSERT INTO Categoria (categoria) VALUES ('Juguetes');
+INSERT INTO Categoria (categoria) VALUES ('Automóviles');
+INSERT INTO Categoria (categoria) VALUES ('Libros');
+INSERT INTO Categoria (categoria) VALUES ('Software');
+INSERT INTO Categoria (categoria) VALUES ('Deportes');
+INSERT INTO Categoria (categoria) VALUES ('Jardinería');
+
+

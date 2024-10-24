@@ -46,6 +46,20 @@ class GlobalService {
                 return new Rol(null, data.rol);
             case 'Usuario':
                 return new Usuario(null, data.nombre, data.apellido, data.username, data.password, data.idRol);
+            case 'Proveedores':
+                return new Proveedores(null, data.nombre);
+            case 'TipoArticulo':
+                return new TipoArticulo(null, data.titulo);
+            case 'Categoria':
+                return new Categoria(null, data.categoria);
+            case 'Estado':
+                return new Estado(null, data.estado);
+            case 'Articulo':
+                return new Articulo(null, data.titulo, data.precio, data.imagen, data.descripcion, data.idEstado, data.idTipoArticulo, data.idUsuario, data.idProveedor);
+            case 'ArticuloCategoria':
+                return new ArticuloCategoria(data.idCategoria, data.idArticulo);
+            case 'ShopBag':
+                return new ShopBag(data.idUsuario, data.idArticulo, data.cantidad, data.seleccionado);
         }
     }
 }

@@ -30,4 +30,17 @@ router.get('/rol/:id', (req, res) => {
   });
 });
 
+// Eliminar un rol por id
+router.delete('/rol/:id', (req, res) => {
+  const { id } = req.params;
+  
+  RolService.delete(id, (result) => {
+    if (result.affectedRows > 0) {
+      res.json({ message: 'Rol eliminado con éxito' });
+    } else {
+      res.status(404).json({ message: 'Rol no encontrado' });
+    }
+  });
+});
+
 module.exports = router;

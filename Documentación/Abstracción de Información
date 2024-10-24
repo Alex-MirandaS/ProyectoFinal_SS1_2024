@@ -10,10 +10,21 @@ OBJETOS/TABLAS:
 	- Estado (id, estado) / (NUEVO, USADO - Como Nuevo, USADO - Buen estado, USADO - aceptable)
 	- ArtículoCategoría ( idCategoría, idArtículo)
 	- ShopBag (idUsuario, idArtículo, Monto, Seleccionado(Boolean))
-	- Orden (id, idUsuario, fecha, total, status)
+	- Orden (id, idUsuario, fecha, total, idEstadoOrden)
+	- EstadoOrden (id, estado)
 	- DetalleOrden(idOrden, idProducto, Monto)
 
 VISTAS:
 	-Usuario
-		
+		-Catalogo Digital
+		-Carrito
+		-Cobros
+		-Inscripción de Clientes
 	-Administrador
+		-Manejo de Productos (Proveedores, TipoArticulo, Categoria, Estado, Articulo)
+		-Red Social...
+		-Reportes
+
+Faltantes:
+	Encriptar contraseñas
+	Evitar duplicacion de shopbag, solo agregar cantidad
