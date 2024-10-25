@@ -4,9 +4,10 @@ const UsuarioS = require('../services/UsuarioService');
 const UsuarioService = new UsuarioS();
 
 // Crear un nuevo usuario
-router.post('/usuario', (req, res) => {
+router.post('/usuario', async (req, res) => {
   const { nombre, apellido, username, password, idRol } = req.body;
-  UsuarioService.create({ nombre, apellido, username, password, idRol }, (result) => {
+  const hashedPassword = await UsuarioService.getHashedPassword(password);
+  UsuarioService.create({ nombre, apellido, username, hashedPassword, idRol }, (result) => {
     res.json({ message: 'Usuario creado con éxito'});
   });
 });

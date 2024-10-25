@@ -11,20 +11,23 @@ OBJETOS/TABLAS:
 	- ArtículoCategoría ( idCategoría, idArtículo)
 	- ShopBag (idUsuario, idArtículo, Monto, Seleccionado(Boolean))
 	- Orden (id, idUsuario, fecha, total, idEstadoOrden)
-	- EstadoOrden (id, estado)
+	- EstadoOrden (id, estado, descripcion)
 	- DetalleOrden(idOrden, idProducto, Monto)
 
 VISTAS:
 	-Usuario
+		-Login
+		-Registro
 		-Catalogo Digital
 		-Carrito
 		-Cobros
-		-Inscripción de Clientes
+		-Inscripción de Clientes (agregar campo a usuario) / Registro
 	-Administrador
 		-Manejo de Productos (Proveedores, TipoArticulo, Categoria, Estado, Articulo)
 		-Red Social...
 		-Reportes
 
 Faltantes:
-	Encriptar contraseñas
 	Evitar duplicacion de shopbag, solo agregar cantidad
+	Error duplicacion de username
+	Agregar RutaLogin

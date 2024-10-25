@@ -14,7 +14,7 @@ CREATE TABLE Usuario (
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(10) NOT NULL,
+    password VARCHAR(100) NOT NULL,
     idRol INT NOT NULL,
     FOREIGN KEY (idRol) REFERENCES Rol(id)
 );
@@ -83,14 +83,15 @@ CREATE TABLE ShopBag (
 -- Tabla EstadoOrden
 CREATE TABLE EstadoOrden (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    estado VARCHAR(50) NOT NULL
+    estado VARCHAR(50) NOT NULL,
+    descripcion TEXT NOT NULL
 );
 
 -- Tabla Orden
 CREATE TABLE Orden (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idUsuario INT NOT NULL,
-    fecha DATETIME NOT NULL,
+    fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     total DECIMAL(10, 2) NOT NULL,
     idEstadoOrden INT NOT NULL,
     FOREIGN KEY (idUsuario) REFERENCES Usuario(id),
