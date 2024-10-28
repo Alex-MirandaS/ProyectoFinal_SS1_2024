@@ -1,0 +1,71 @@
+<!--
+Author: Colorlib
+Author URL: https://colorlib.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Agregar Producto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- burbujas -->
+    <script type="application/x-javascript">
+        addEventListener("load", function() {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- web font -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- //web font -->
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a id="home" class="navbar-brand" href="">eCommerce</a>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent ">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" href="#!">Agregar Producto</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" href="#!">Perfil</a></li>
+                    <li id="orders" class="nav-item"><a id="listOrders" class="nav-link" href="#!">Pedidos</a></li>
+                </ul>
+                <form class="d-flex ">
+                    <button id="carrito" class="btn btn-outline-dark" type="submit">
+                                <i class="bi-cart-fill me-1 "></i>
+                                Carrito
+                                <span class="badge bg-dark text-white ms-1 rounded-pill ">0</span>
+                            </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- main class="text" -->
+    <div class="py-5">
+        <h1 class="display-4 fw-bolder">Agregar Nuevo Producto</h1>
+        <div class="main-agileinfo">
+            <div class="agileits-top">
+                <form>
+                    <input id="nameProduct" class="btn btn-outline-dark mt-auto" type="text" name="productName" placeholder="Nombre del Producto" required="">
+                    <input id="priceProduct" type="number" class="btn btn-outline-dark mt-auto" name="price" placeholder="Precio del Producto" required="">
+                    <div id="contenedor">
+                        <template id="templateCategorys">
+                            <select id="categorys"></select>
+                        </template>
+                    </div>
+                    <input id="desctProduct" class="btn btn-outline-dark mt-auto" type="text" name="description" placeholder="Descripción del Producto" required="">
+                    <input id="button" class="btn btn-outline-dark " type="submit" value="Ingresar">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
