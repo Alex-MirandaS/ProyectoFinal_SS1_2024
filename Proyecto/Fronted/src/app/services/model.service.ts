@@ -6,8 +6,12 @@ import { Observable } from 'rxjs';
 })
 export class ModelService {
   protected apiUrl = 'http://localhost:3000/api/';
-  constructor(private http: HttpClient, private route: String) { 
+  constructor(protected http: HttpClient, private route: String) { 
     this.apiUrl+= route;
+  }
+
+  add(data:any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
   }
 
   getAll(): Observable<any[]> {
@@ -16,11 +20,6 @@ export class ModelService {
 
   getByID(id:number): Observable<any[]> {
     return this.http.get<any>(`${this.apiUrl}/${id}`);
-  }
-
-  // POST: Agregar un nuevo elemento
-  add(id: number, titulo:string, precio:number, imagen:string, descripcion:string, idEstado:number, idTipoArticulo:number, idUsuario:number, idProveedor:number): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { id, titulo, precio, imagen, descripcion, idEstado, idTipoArticulo, idUsuario, idProveedor });
   }
 
   // PUT: Actualizar un elemento

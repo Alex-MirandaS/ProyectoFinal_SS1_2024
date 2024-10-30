@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { ModelService } from '../../model.service';
+import { ModelService } from '../model.service';
 import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
-export class ArticuloService extends ModelService{
+export class ProveedorService extends ModelService{
   constructor(http: HttpClient){
-    super(http, 'articulo')
+    super(http, 'proveedor')
   }
 }

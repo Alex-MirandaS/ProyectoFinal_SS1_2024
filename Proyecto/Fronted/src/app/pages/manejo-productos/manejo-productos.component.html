@@ -11,43 +11,126 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <title>Agregar Producto</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- burbujas -->
-    <script type="application/x-javascript">
-        addEventListener("load", function() {
-            setTimeout(hideURLbar, 0);
-        }, false);
-
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <!-- web font -->
-    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
-    <!-- //web font -->
 </head>
 
 <body>
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a id="home" class="navbar-brand" href="">eCommerce</a>
+            <a id="home" class="navbar-brand" href="">Men's Style</a>
             <div class="collapse navbar-collapse " id="navbarSupportedContent ">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
-                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" href="#!">Agregar Producto</a></li>
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page"
+                            href="#!">Agregar Producto</a></li>
                     <li class="nav-item"><a id="perfil" class="nav-link" href="#!">Perfil</a></li>
                     <li id="orders" class="nav-item"><a id="listOrders" class="nav-link" href="#!">Pedidos</a></li>
                 </ul>
-                <form class="d-flex ">
-                    <button id="carrito" class="btn btn-outline-dark" type="submit">
-                                <i class="bi-cart-fill me-1 "></i>
-                                Carrito
-                                <span class="badge bg-dark text-white ms-1 rounded-pill ">0</span>
-                            </button>
-                </form>
             </div>
         </div>
     </nav>
-    <!-- main class="text" -->
+
+    <div class="container">
+        <div class=" text-center mt-5 ">
+            <h1>Agregar Artículo</h1>
+        </div>
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
+                        <div class="container">
+                            <form id="contact-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit()" > 
+                                <div class="controls">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_name">Título</label>
+                                                <input id="form_name" type="text" name="name" class="form-control"
+                                                    placeholder="Agrega el Título del Artículo" required="required"
+                                                    data-error="Firstname is required." formControlName="titulo">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_lastname">Precio (Q)</label>
+                                                <input  id="precio" type="number" formControlName="precio" step="0.01" min="1" placeholder="Agrega el Valor del Artículo"
+                                                    required="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_need">Tipo de Artículo</label>
+                                                <select formControlName="idTipoArticulo" class="form-control"
+                                                    required data-error="Selecciona un tipo de Artículo">
+                                                    <option value="" selected disabled>Selecciona un tipo de Artículo</option>
+                                                    <option *ngFor="let tipoArticulo of tiposArticulo" value={{tipoArticulo.id}}>{{tipoArticulo.titulo}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_need">Proveedor</label>
+                                                <select id="form_need" name="need" class="form-control"
+                                                    required="required" data-error="Selecciona al Proveedor del Artículo" formControlName="idProveedor">
+                                                    <option value="" selected disabled>Selecciona al Proveedor</option>
+                                                    <option *ngFor="let proveedor of proveedores" value={{proveedor.id}}>{{proveedor.nombre}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_need">Estado</label>
+                                                <select formControlName="idEstado" class="form-control"
+                                                    required data-error="Selecciona al Proveedor del Artículo">
+                                                    <option value="" selected disabled>Selecciona el Estado del Artículo</option>
+                                                    <option *ngFor="let estado of estados" value={{estado.id}}>{{estado.estado}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="form_email">Imagen</label>
+                                                <input id="imagen" type="file" formControlName="imagen" accept="image/*"
+                                                    placeholder="Añade una imagen" formControlName="imagen">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="form_message">Descripción</label>
+                                                <textarea id="form_message" name="message" class="form-control"
+                                                    placeholder="Escribe la descripción del artículo" rows="4" required="required"
+                                                    data-error="Please, leave us a message." formControlName="descripcion"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-12">
+                                            <input type="submit" [disabled]="form.invalid" class="btn btn-success btn-send  pt-2 btn-block" value="+">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.8 -->
+
+            </div>
+            <!-- /.row-->
+
+        </div>
+    </div>
+
+    <!-- main class="text"
     <div class="py-5">
         <h1 class="display-4 fw-bolder">Agregar Nuevo Producto</h1>
         <div class="main-agileinfo">
@@ -65,7 +148,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 </html>

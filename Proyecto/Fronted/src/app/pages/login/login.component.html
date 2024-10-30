@@ -16,20 +16,20 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <h3>Login</h3>
 
         <label for="username">Usuario</label>
-        <input type="text" placeholder="Escribe tu nombre de Usuario" id="username">
+        <input type="text" placeholder="Escribe tu nombre de Usuario" formControlName="username" >
 
         <label for="password">Contraseña</label>
-        <input type="password" placeholder="Escribe tu Contraseña" id="password">
+        <input type="password" placeholder="Escribe tu Contraseña" formControlName="password">
 
-        <button id="button">Ingresar</button>
-
+        <button type="submit">Ingresar</button>
+        <p *ngIf="errorMessage">{{ errorMessage }}</p>
         <div class="social">
             <label id="texto">¿No tienes Cuenta?</label>
-            <button id="register"> Registrate </button>
+            <button (click)="registrarse()">Registrate </button>
         </div>
     </form>
 

@@ -15,19 +15,31 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <h3>Registrate</h3>
 
+        <label for="username">Nombre</label>
+        <input type="text" placeholder="Ingresa su Nombre" formControlName="nombre">
+        <div *ngIf="registerForm.get('nombre')?.hasError('required')">
+            Nombre es requerido.
+        </div>
+
+        <label for="username">Apellido</label>
+        <input type="text" placeholder="Ingresa su Apellido" formControlName="apellido">
+
         <label for="username">Usuario</label>
-        <input type="text" placeholder="Ingresa un Nombre de Usuario" id="username">
+        <input type="text" placeholder="Ingresa un Nombre de Usuario" formControlName="username">
 
         <label for="password">Contraseña</label>
-        <input type="password" placeholder="Ingresa una Contraseña" id="password">
+        <input type="password" placeholder="Ingresa una Contraseña" formControlName="password">
 
         <label for="password">Confirmar Contraseña</label>
-        <input type="password" placeholder="Confirma la Contraseña" id="confpassword">
+        <input type="password" placeholder="Confirma la Contraseña" formControlName="confpassword">
+        <div *ngIf="registerForm.hasError('passwordMismatch')">
+            Las contraseñas no coinciden.
+          </div>
 
-        <button id="button">Registrarse</button>
+        <button type="submit" [disabled]="registerForm.invalid">Registrarse</button>
 
     </form>
 

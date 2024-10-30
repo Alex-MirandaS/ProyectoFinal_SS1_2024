@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ArticuloService } from 'src/app/services/catalogo/articuloServices/articulo.service';
-import { TipoArticuloService } from 'src/app/services/catalogo/tipoArticuloServices/tipo-articulo.service';
+import { ArticuloService } from 'src/app/services/articuloServices/articulo.service';
+import { TipoArticuloService } from 'src/app/services/tipoArticuloServices/tipo-articulo.service';
 
 @Component({
   selector: 'app-catalogo',
@@ -11,12 +11,14 @@ export class CatalogoComponent implements OnInit{
 
   articulos: any[] = [];
   tiposArticulo: any[] = [];
+  idUser: number = 0;
 
   constructor(private articuloService: ArticuloService, private tipoArticuloService: TipoArticuloService) {}
 
   ngOnInit(): void {
     this.loadArticulos();
     this.loadTiposArticulo();
+    this.idUser = JSON.parse(localStorage.getItem('idUser') || '{}');
   }
 
   loadArticulos() {
