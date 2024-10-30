@@ -17,7 +17,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <h5 class="navbar-brand">eCommerce</h5>
+            <h5 class="navbar-brand">Men's Style</h5>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" href="#!">Agregar Producto</a></li>
@@ -28,7 +28,7 @@
                     <button id="carrito" class="btn btn-outline-dark" type="submit">
                             <i class="bi-cart-fill me-1"></i>
                             Carrito
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{articulos.length}}</span>
                         </button>
                 </form>
             </div>
@@ -60,22 +60,19 @@
             <!-- Section-->
             <div id="containerProducts" class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 
-
-                <!-- INICIA MODELO -->
-                <template id="templateProducts">
-                <div class="col mb-5">
+                <div class="col mb-5" *ngFor="let articulo of articulos">
                     <div class="card h-100">
                         <!-- Sale badge-->
-                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                        <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ getTipoArticulo(articulo.idTipoArticulo) }}</div>
                         <!-- Product image-->
                         <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                         <!-- Product details-->
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product name-->
-                                <h5 id="nameProduct" class="fw-bolder">Sale Item</h5>
+                                <h5 id="nameProduct" class="fw-bolder">{{ articulo.titulo }}</h5>
                                 <!-- Product price-->
-                                <span id="priceProduct">Q50.00</span>
+                                <span id="priceProduct">{{ articulo.precio | currency: 'Q' }}</span>
                             </div>
                         </div>
                         <!-- Product actions-->
@@ -84,7 +81,6 @@
                         </div>
                     </div>
                 </div>
-                </template>
                 <!-- TERMINA MODELO -->
             </div>
         </div>

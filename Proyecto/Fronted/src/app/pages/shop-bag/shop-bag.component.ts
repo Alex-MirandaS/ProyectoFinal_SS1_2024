@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShopBagService } from '../../services/ShopBagService';
+
 
 @Component({
   selector: 'app-shop-bag',
@@ -10,7 +10,5 @@ export class ShopBagComponent {
 checkout() {
 throw new Error('Method not implemented.');
 }
-  cart = this.shopBagService.getCart();
 
-  constructor(private shopBagService: ShopBagService) {}
 }

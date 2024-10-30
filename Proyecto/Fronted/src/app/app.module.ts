@@ -1,16 +1,29 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CatalogoComponent } from './pages/catalogo/catalogo.component';
+import { ShopBagComponent } from './pages/shop-bag/shop-bag.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ManejoProductosComponent } from './pages/manejo-productos/manejo-productos.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CatalogoComponent,
+    ShopBagComponent,
+    LoginComponent,
+    RegisterComponent,
+    ManejoProductosComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
