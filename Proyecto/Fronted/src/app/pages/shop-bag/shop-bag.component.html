@@ -67,7 +67,7 @@
                         </table>
 
                         <div class="d-flex " id="containerButton">
-                                <button id="buy" class="btn btn-outline-dark flex-shrink-0 " type="button " *ngIf="shopBag && shopBag.length > 0">
+                                <button id="buy" class="btn btn-outline-dark flex-shrink-0 " type="button " *ngIf="shopBag && shopBag.length > 0" (click)="loginPasarela()">
                                         <i class="bi-cart-fill me-1 "></i>
                                         ¡Comprar!
                                     </button>

@@ -12,6 +12,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ManejoProductosComponent } from './pages/manejo-productos/manejo-productos.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
+import { ReporteViewComponent } from './pages/reporte-view/reporte-view.component';
+import { LoginPasarelaComponent } from './pages/login-pasarela/login-pasarela.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AdminComponent } from './pages/admin/admin.component';
     RegisterComponent,
     ManejoProductosComponent,
     HomeComponent,
-    AdminComponent
+    AdminComponent,
+    ReportesComponent,
+    ReporteViewComponent,
+    LoginPasarelaComponent
   ],
   imports: [
     BrowserModule,

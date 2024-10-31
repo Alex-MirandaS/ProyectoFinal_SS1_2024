@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticuloService } from 'src/app/services/articuloServices/articulo.service';
 import { TipoArticuloService } from 'src/app/services/tipoArticuloServices/tipo-articulo.service';
-import { ShopBagService } from 'src/app/services/shopBag/shop-bag.service';
 import { Router } from '@angular/router';
 import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
 import { EstadoService } from 'src/app/services/estado/estado.service';

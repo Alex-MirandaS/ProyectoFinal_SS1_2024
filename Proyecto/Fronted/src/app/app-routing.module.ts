@@ -7,6 +7,9 @@ import { RegisterComponent } from './pages/register/register.component';
 import { ManejoProductosComponent } from './pages/manejo-productos/manejo-productos.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AdminComponent } from './pages/admin/admin.component';
+import { ReportesComponent } from './pages/reportes/reportes.component';
+import { ReporteViewComponent } from './pages/reporte-view/reporte-view.component';
+import { LoginPasarelaComponent } from './pages/login-pasarela/login-pasarela.component';
 
 const routes: Routes = [
   { path: '', component: CatalogoComponent },
@@ -15,7 +18,10 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'manejoProductos', component: ManejoProductosComponent },
-  { path: 'admin', component: AdminComponent }
+  { path: 'admin', component: AdminComponent },
+  { path: 'reportes', component: ReportesComponent },
+  { path: 'reporteView', component: ReporteViewComponent },
+  { path: 'loginPasarela', component: LoginPasarelaComponent }
 ];
 
 @NgModule({

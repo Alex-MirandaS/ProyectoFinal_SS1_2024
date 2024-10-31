@@ -81,6 +81,8 @@ export class CatalogoComponent implements OnInit{
 
   redirectToLogin() {
     localStorage.setItem('idUser', JSON.stringify(0));
+    localStorage.setItem('idPasarelaPago', JSON.stringify(0));
+    localStorage.setItem('jwt', JSON.stringify(''));
     this.router.navigate(['/login']);
   }
 

@@ -14,11 +14,13 @@ export class ShopBagComponent implements OnInit {
   tiposArticulo: any[] = [];
   articulos: any[] = [];
   idUser: number = 0;
+  jwt: any = '';
 
   constructor(private shopBagService: ShopBagService, private tipoArticuloService: TipoArticuloService, private articuloService: ArticuloService, private router: Router) { }
 
   ngOnInit(): void {
     this.idUser = JSON.parse(localStorage.getItem('idUser') || '{}');
+    this.jwt = JSON.parse(localStorage.getItem('jwt') || '{}');
     this.loadShopBag();
     this.loadTiposArticulo();
   }
@@ -67,7 +69,17 @@ export class ShopBagComponent implements OnInit {
 
   redirectToLogin() {
     localStorage.setItem('idUser', JSON.stringify(0));
+    localStorage.setItem('idPasarelaPago', JSON.stringify(0));
+    localStorage.setItem('jwt', JSON.stringify(''));
     this.router.navigate(['/login']);
+  }
+
+  loginPasarela() {
+    if(this.jwt!=''){
+      
+    }else{
+      this.router.navigate(['/loginPasarela']);
+    }
   }
 
 }

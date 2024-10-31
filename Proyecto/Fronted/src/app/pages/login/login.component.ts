@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   errorMessage: string = '';
   user: any;
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService,private router: Router) {}
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private router: Router) { }
   ngOnInit() {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
@@ -26,17 +26,18 @@ export class LoginComponent implements OnInit{
 
   onSubmit() {
     if (this.loginForm.valid) {
-       this.usuarioService.login(this.loginForm.value).subscribe(
+      this.usuarioService.login(this.loginForm.value).subscribe(
         response => {
-          const userId = response.userId;
+          let userId = response.user.id;
+          let pasarelaPagoId = response.user.idPasarelaPago;
           localStorage.setItem('idUser', JSON.stringify(userId));
-
+          localStorage.setItem('idPasarelaPago', JSON.stringify(pasarelaPagoId));
           this.usuarioService.getByID(userId).subscribe(
             userInfo => {
-              const user:any = userInfo;
-              if(user.idRol==1){
+              const user: any = userInfo;
+              if (user.idRol == 1) {
                 this.router.navigate(['/admin']);
-              }else{
+              } else {
                 this.router.navigate(['/']);
               }
             },
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit{
               console.error('Error al obtener la información del usuario:', error);
             }
           );
+          
         },
         error => {
           this.errorMessage = error.error.message;
@@ -52,7 +54,7 @@ export class LoginComponent implements OnInit{
     }
   }
 
-  getUser(id:number){
+  getUser(id: number) {
     this.usuarioService.getByID(id).subscribe(
       response => {
         return response;

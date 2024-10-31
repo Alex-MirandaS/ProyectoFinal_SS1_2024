@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Table 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container px-4 px-lg-5">
+            <a id="home" class="navbar-brand" [routerLink]="['/admin']">Men's Style</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/manejoProductos']">Manejo de Productos</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/reportes']">Reportes</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section">{{ reporteName }}</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-wrap">
+                        <table class="table" *ngIf="objects && objects.length > 0">
+                            <thead class="thead-primary">
+                                <tr>
+                                    <th *ngFor="let column of getColumns()">{{ column }}</th>
+                                </tr>
+                            </thead>
+                            <tbody id="container">
+                                <tr *ngFor="let row of objects">
+                                    <td *ngFor="let column of getColumns()">{{ row[column] || '-' }}</td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
