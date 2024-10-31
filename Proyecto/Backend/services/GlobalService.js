@@ -47,7 +47,7 @@ class GlobalService {
             case 'Rol':
                 return new Rol(null, data.rol);
             case 'Usuario':
-                return new Usuario(null, data.nombre, data.apellido, data.email, data.hashedPassword, data.idRol);
+                return new Usuario(null, data.nombre, data.apellido, data.email, data.hashedPassword, data.idRol,data.idPasarelaPago);
             case 'Proveedores':
                 return new Proveedores(null, data.nombre);
             case 'TipoArticulo':

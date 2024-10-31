@@ -11,7 +11,7 @@ router.post('/usuario', async (req, res) => {
     const emailExists = await checkEmailExistence(email, idPasarelaPago);
     if (emailExists.tieneCuenta) {
       const hashedPassword = await UsuarioService.getHashedPassword(password);
-      UsuarioService.create({ nombre, apellido, email, hashedPassword, idRol }, (insertedId) => {
+      UsuarioService.create({ nombre, apellido, email, hashedPassword, idRol , idPasarelaPago}, (insertedId) => {
         if (insertedId) {
           res.json({ message: 'Usuario creado con éxito', id: insertedId });
         } else {
@@ -82,7 +82,7 @@ router.post('/usuario/login', async (req, res) => {
     case true:
       return res.status(404).json({ message: 'Usuario no encontrado' });
     default:
-      return res.status(200).json({ message: 'Inicio de sesión exitoso', userId: match });
+      return res.status(200).json({ message: 'Inicio de sesión exitoso', user: match });
   }
 });
 module.exports = router;

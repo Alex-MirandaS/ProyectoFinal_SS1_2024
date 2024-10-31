@@ -31,12 +31,12 @@ class UsuarioService extends GlobalService {
 
           const match = await bcrypt.compare(plainPassword, hashedPassword);
           if (match) { 
-            resolve(results[0].id);
+            resolve(results[0]);
           } else {
             resolve(false);
           }
         } else {
-          resolve(true);
+          resolve(true); 
         }
       });  
     });

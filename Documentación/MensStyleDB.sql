@@ -16,6 +16,7 @@ CREATE TABLE Usuario (
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     idRol INT NOT NULL,
+    idPasarelaPago INT NOT NULL,
     FOREIGN KEY (idRol) REFERENCES Rol(id)
 );
 
@@ -142,4 +143,57 @@ INSERT INTO EstadoOrden (estado, descripcion) VALUES ('Cancelado por falta de fo
 INSERT INTO EstadoOrden (estado, descripcion) VALUES ('Cancelado por solicitud del cliente', 'El cliente ha solicitado la cancelación de la orden');
 INSERT INTO EstadoOrden (estado, descripcion) VALUES ('En proceso', 'La orden está siendo procesada por el sistema y se encuentra en progreso ');
 
-INSERT INTO Usuario (nombre, apellido, email, password, idRol) VALUES ('Admin', 'Admin', 'mensstyle@gmail.com', 'M3N55TYL3', 1);
+INSERT INTO Orden (idUsuario, total, idEstadoOrden)
+VALUES (6, 5450.00, 1); 
+
+INSERT INTO DetalleOrden (idOrden, idProducto, cantidad)
+VALUES (LAST_INSERT_ID(), 1, 1); 
+
+INSERT INTO Orden (idUsuario, total, idEstadoOrden)
+VALUES (6, 10900, 2); 
+
+INSERT INTO DetalleOrden (idOrden, idProducto, cantidad)
+VALUES (LAST_INSERT_ID(), 1, 2);
+
+INSERT INTO Usuario (nombre, apellido, email, password, idRol) VALUES ('Mens-Style', 'Admin', 'mensstyle@gmail.com', 'M3N55TYL3', 1);
+
+/*REPORTE 1/EXISTENCIAS*/
+SELECT A.id, A.titulo, A.precio, E.estado, TA.titulo AS tipo_articulo, P.nombre AS proveedor
+FROM Articulo A
+INNER JOIN Estado E ON A.idEstado = E.id
+INNER JOIN TipoArticulo TA ON A.idTipoArticulo = TA.id
+INNER JOIN Proveedores P ON A.idProveedor = P.id
+WHERE A.idEstado IN (SELECT id FROM Estado WHERE  id =  A.idEstado );
+/*REPORTE 2/USUARIOS*/
+SELECT id, nombre, apellido, email, (SELECT rol FROM Rol WHERE id = idRol) AS rol
+FROM Usuario;
+/*REPORTE 3/ Productos Vendidos*/
+SELECT A.titulo AS producto, C.categoria, P.nombre AS proveedor, SUM(DO.cantidad) AS total_vendido
+FROM DetalleOrden DO
+INNER JOIN Articulo A ON DO.idProducto = A.id
+INNER JOIN ArticuloCategoria AC ON A.id = AC.idArticulo
+INNER JOIN Categoria C ON AC.idCategoria = C.id
+INNER JOIN Proveedores P ON A.idProveedor = P.id
+GROUP BY A.titulo, C.categoria, P.nombre;
+/*REPORTE 4/ Productos Vendidos*/
+SELECT A.titulo AS producto, SUM(DO.cantidad) AS total_vendido
+FROM DetalleOrden DO
+INNER JOIN Articulo A ON DO.idProducto = A.id
+GROUP BY A.titulo
+HAVING total_vendido > (SELECT AVG(cantidad) FROM DetalleOrden);
+/*REPORTE 5/ Reporte General de Ventas*/
+SELECT SUM(total) AS saldo_total_ventas
+FROM Orden
+WHERE idEstadoOrden = (SELECT id FROM EstadoOrden WHERE estado = 'Aprobado');
+/*REPORTE 6/ Reporte de Errores*/
+SELECT O.id AS id_orden, U.nombre AS usuario, EO.estado, EO.descripcion
+FROM Orden O
+INNER JOIN Usuario U ON O.idUsuario = U.id
+INNER JOIN EstadoOrden EO ON O.idEstadoOrden = EO.id
+WHERE EO.estado LIKE 'Cancelado%';
+/*REPORTE 7/ Reporte de Empleados*/
+SELECT U.nombre, U.apellido, R.rol AS nombre_rol
+FROM Usuario U
+INNER JOIN Rol R ON U.idRol = R.id
+WHERE U.idRol = 1;
+

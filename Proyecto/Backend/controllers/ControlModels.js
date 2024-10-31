@@ -1,6 +1,6 @@
 const db = require('../db/db');
 const fieldsArray = {
-  Usuario: ['nombre', 'apellido', 'email', 'password', 'idRol'],
+  Usuario: ['nombre', 'apellido', 'email', 'password', 'idRol','idPasarelaPago'],
   Rol: ['rol'],
   Proveedores: ['nombre'],
   TipoArticulo: ['titulo'],
