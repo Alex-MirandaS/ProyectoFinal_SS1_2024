@@ -6,8 +6,12 @@ const OrdenService = new OrdenS();
 // Crear una nueva orden
 router.post('/orden', (req, res) => {
   const { idUsuario, total, idEstadoOrden } = req.body;
-  OrdenService.create({ idUsuario, total, idEstadoOrden }, (result) => {
-    res.json({ message: 'Orden creada con éxito'});
+  OrdenService.create({ idUsuario, total, idEstadoOrden }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'Orden creada con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear la Orden' });
+    }
   });
 });
 

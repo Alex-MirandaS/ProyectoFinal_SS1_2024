@@ -1,6 +1,6 @@
 const db = require('../db/db');
 const fieldsArray = {
-  Usuario: ['nombre', 'apellido', 'username', 'password', 'idRol'],
+  Usuario: ['nombre', 'apellido', 'email', 'password', 'idRol'],
   Rol: ['rol'],
   Proveedores: ['nombre'],
   TipoArticulo: ['titulo'],
@@ -25,8 +25,12 @@ const fieldsArray = {
         const values = fieldsArray[table].map(field => data[field]);
       
         db.query(query, values, (err, result) => {
-          if (err) throw err;
-          callback(result);
+          if (err) {
+            console.error('Error inserting data:', err);
+            return callback(null); 
+        }
+        const insertedId = result.insertId || null;
+        callback(insertedId);
         });
     }
 

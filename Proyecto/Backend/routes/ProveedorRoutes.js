@@ -6,8 +6,12 @@ const ProveedorService = new ProveedorS();
 // Crear un nuevo proveedor
 router.post('/proveedor', (req, res) => {
   const { nombre } = req.body;
-  ProveedorService.create({ nombre }, (result) => {
-    res.json({ message: 'Proveedor creado con éxito'});
+  ProveedorService.create({ nombre }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'Proveedor creado con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear el Proveedor' });
+    }
   });
 });
 

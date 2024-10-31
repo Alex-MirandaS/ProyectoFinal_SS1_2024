@@ -17,20 +17,12 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a id="home" class="navbar-brand" [routerLink]="['/']">Men's Style</a>
+            <a id="home" class="navbar-brand" [routerLink]="['/home']">Men's Style</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/']">Perfil</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/']">Ordenes</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a></li>
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/login']">Login</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/register']">Register</a></li>
                 </ul>
-                <form class="d-flex">
-                    <button id="carrito" class="btn btn-outline-dark" type="submit" [routerLink]="['/shopBag']">
-                            <i class="bi-cart-fill me-1"></i>
-                            ShopCar
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{shopBagItems.length}}</span>
-                        </button>
-                </form>
             </div>
         </div>
     </nav>
@@ -76,11 +68,13 @@
                             </div>
                         </div>
                         <!-- Product actions-->
+                         <template>
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                            <div class="text-center"> <button id="productPageButton" class="btn btn-outline-dark mt-auto" (click)="addShopBag(articulo.id)">
+                           <!-- <div class="text-center"> <button id="productPageButton" class="btn btn-outline-dark mt-auto" (click)="addShopBag(articulo.id)"> 
                                 Agregar
-                            </button></div>
+                            </button></div> -->
                         </div>
+                    </template>
                     </div>
                 </div>
                 <!-- TERMINA MODELO -->

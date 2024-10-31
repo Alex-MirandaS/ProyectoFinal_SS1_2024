@@ -6,8 +6,12 @@ const EstadoOrdenService = new EstadoOrdenS();
 // Crear un nuevo estadoOrden
 router.post('/estadoOrden', (req, res) => {
   const { estado, descripcion } = req.body;
-  EstadoOrdenService.create({ estado, descripcion }, (result) => {
-    res.json({ message: 'EstadoOrden creado con éxito'});
+  EstadoOrdenService.create({ estado, descripcion }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'EstadoOrden creado con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear el EstadoOrden' });
+    }
   });
 });
 

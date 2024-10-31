@@ -6,8 +6,12 @@ const TipoArticuloService = new TipoArticuloS();
 // Crear un nuevo tipoArticulo
 router.post('/tipoArticulo', (req, res) => {
   const { titulo } = req.body;
-  TipoArticuloService.create({ titulo }, (result) => {
-    res.json({ message: 'TipoArticulo creado con éxito'});
+  TipoArticuloService.create({ titulo }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'TipoArticulo creado con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear el TipoArticulo' });
+    }
   });
 });
 

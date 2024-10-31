@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   errorMessage: string = '';
+  user: any;
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService,private router: Router) {}
   ngOnInit() {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -27,14 +28,38 @@ export class LoginComponent implements OnInit{
     if (this.loginForm.valid) {
        this.usuarioService.login(this.loginForm.value).subscribe(
         response => {
-          this.router.navigate(['/']);
-          console.log(response.userId);
-          localStorage.setItem('idUser', JSON.stringify(response.userId));
+          const userId = response.userId;
+          localStorage.setItem('idUser', JSON.stringify(userId));
+
+          this.usuarioService.getByID(userId).subscribe(
+            userInfo => {
+              const user:any = userInfo;
+              if(user.idRol==1){
+                this.router.navigate(['/admin']);
+              }else{
+                this.router.navigate(['/']);
+              }
+            },
+            error => {
+              console.error('Error al obtener la información del usuario:', error);
+            }
+          );
         },
         error => {
           this.errorMessage = error.error.message;
         }
       );
     }
+  }
+
+  getUser(id:number){
+    this.usuarioService.getByID(id).subscribe(
+      response => {
+        return response;
+      },
+      error => {
+        this.errorMessage = error.error.message;
+      }
+    );
   }
 }

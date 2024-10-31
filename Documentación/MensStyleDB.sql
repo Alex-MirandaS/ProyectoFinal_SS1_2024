@@ -13,7 +13,7 @@ CREATE TABLE Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
-    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     idRol INT NOT NULL,
     FOREIGN KEY (idRol) REFERENCES Rol(id)
@@ -109,7 +109,7 @@ CREATE TABLE DetalleOrden (
 );
 
 -- Datos Iniciales 
-INSERT INTO Rol (rol) VALUES ('Admin'), ('Cliente'), ('Proveedor');
+INSERT INTO Rol (rol) VALUES ('Admin'), ('Cliente');
 
 INSERT INTO Estado (estado) VALUES ('NUEVO'), ('USADO - Como Nuevo'), ('USADO - Buen estado'), ('USADO - aceptable');
 
@@ -137,4 +137,9 @@ INSERT INTO Categoria (categoria) VALUES ('Software');
 INSERT INTO Categoria (categoria) VALUES ('Deportes');
 INSERT INTO Categoria (categoria) VALUES ('Jardinería');
 
+INSERT INTO EstadoOrden (estado, descripcion) VALUES ('Aprobado', 'La orden se ha aprobado correctamente');
+INSERT INTO EstadoOrden (estado, descripcion) VALUES ('Cancelado por falta de fondos', 'La orden fue cancelada debido a la falta de fondos suficientes ');
+INSERT INTO EstadoOrden (estado, descripcion) VALUES ('Cancelado por solicitud del cliente', 'El cliente ha solicitado la cancelación de la orden');
+INSERT INTO EstadoOrden (estado, descripcion) VALUES ('En proceso', 'La orden está siendo procesada por el sistema y se encuentra en progreso ');
 
+INSERT INTO Usuario (nombre, apellido, email, password, idRol) VALUES ('Admin', 'Admin', 'mensstyle@gmail.com', 'M3N55TYL3', 1);

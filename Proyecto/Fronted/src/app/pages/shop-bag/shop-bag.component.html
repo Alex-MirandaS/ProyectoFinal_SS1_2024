@@ -16,19 +16,19 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a id="home" class="navbar-brand" href="">eCommerce</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent ">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
-                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" href="#!">Agregar Producto</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" href="#!">Perfil</a></li>
-                    <li id="orders" class="nav-item"><a id="listOrders" class="nav-link" href="#!">Pedidos</a></li>
+            <a id="home" class="navbar-brand" [routerLink]="['/']">Men's Style</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/']">Perfil</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/']">Ordenes</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a></li>
                 </ul>
-                <form class="d-flex ">
-                    <button class="btn btn-outline-dark " type="submit ">
-                                <i class="bi-cart-fill me-1 "></i>
-                                Carrito
-                                <span class="badge bg-dark text-white ms-1 rounded-pill ">0</span>
-                            </button>
+                <form class="d-flex">
+                    <button id="carrito" class="btn btn-outline-dark" type="submit" [routerLink]="['/shopBag']">
+                            <i class="bi-cart-fill me-1"></i>
+                            ShopCar
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">{{shopBag.length}}</span>
+                        </button>
                 </form>
             </div>
         </div>
@@ -43,39 +43,34 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-wrap">
-                        <table class="table">
+                        <table class="table" *ngIf="shopBag && shopBag.length > 0">
                             <thead class="thead-primary">
                                 <tr>
                                     <th>SKU</th>
+                                    <th>Tipo Artículo</th>
                                     <th>Nombre</th>
-                                    <th>Descripción</th>
                                     <th>Cantidad</th>
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody id="container">
-                                <template id="templateRow">
-                                <tr>
-                                    <th id="sku" scope="row">1</th>
-                                    <td id="nameProduct">Mark</td>
-                                    <td id="descriptionProduct">Otto</td>
-                                    <td id="cantidad">5</td>
-                                    <td id="total">535</td>
+                                <tr *ngFor="let item of shopBag">
+                                    <th id="sku" scope="row">{{item.idArticulo}}</th>
+                                    <th id="tipoArticulo" scope="row">{{ tiposArticulo[articulos[item.idArticulo]?.idTipoArticulo]?.titulo}}</th>
+                                    <td id="nameProduct">{{articulos[item.idArticulo]?.titulo}}</td>
+                                    <td id="cantidad">{{item.cantidad}}</td>
+                                    <td id="total">{{'Q.'+(item.cantidad * articulos[item.idArticulo]?.precio)}}</td>
                                     <td><button id="deleteProduct">Eliminar</button></td>
-                                </tr>
-                            </template>
+                                </tr> 
                             </tbody>
                         </table>
 
                         <div class="d-flex " id="containerButton">
-                            <template id="templateButtonBuy">
-                                <h4 class="form-control text-center me-3 " id="wallet" style="max-width: 3rem ">dinero</h4>
-                                <button id="buy" class="btn btn-outline-dark flex-shrink-0 " type="button ">
+                                <button id="buy" class="btn btn-outline-dark flex-shrink-0 " type="button " *ngIf="shopBag && shopBag.length > 0">
                                         <i class="bi-cart-fill me-1 "></i>
                                         ¡Comprar!
                                     </button>
-                                </template>
                         </div>
                     </div>
                 </div>

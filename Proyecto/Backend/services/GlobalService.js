@@ -21,7 +21,9 @@ class GlobalService {
 
     create(data, callback) {
         const newObject = this.getObject(data);
-        Model.create(this.table, newObject, callback);
+        Model.create(this.table, newObject, (insertedId) => {
+            callback(insertedId);
+        });
     }
 
     getById(id, callback) {
@@ -45,7 +47,7 @@ class GlobalService {
             case 'Rol':
                 return new Rol(null, data.rol);
             case 'Usuario':
-                return new Usuario(null, data.nombre, data.apellido, data.username, data.hashedPassword, data.idRol);
+                return new Usuario(null, data.nombre, data.apellido, data.email, data.hashedPassword, data.idRol);
             case 'Proveedores':
                 return new Proveedores(null, data.nombre);
             case 'TipoArticulo':

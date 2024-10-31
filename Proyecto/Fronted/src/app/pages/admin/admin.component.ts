@@ -3,25 +3,28 @@ import { ArticuloService } from 'src/app/services/articuloServices/articulo.serv
 import { TipoArticuloService } from 'src/app/services/tipoArticuloServices/tipo-articulo.service';
 import { ShopBagService } from 'src/app/services/shopBag/shop-bag.service';
 import { Router } from '@angular/router';
+import { ProveedorService } from 'src/app/services/proveedor/proveedor.service';
+import { EstadoService } from 'src/app/services/estado/estado.service';
 
 @Component({
-  selector: 'app-catalogo',
-  templateUrl: './catalogo.component.html',
-  styleUrls: ['./catalogo.component.css']
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
 })
-export class CatalogoComponent implements OnInit{
+export class AdminComponent implements OnInit{
 
   articulos: any[] = [];
   tiposArticulo: any[] = [];
   idUser: number = 0;
   shopBagItems: any[] = [];
-
-  constructor(private articuloService: ArticuloService, private tipoArticuloService: TipoArticuloService, private shopBagService: ShopBagService, private router: Router) {}
+  proveedores: any[] = [];
+  estadoArticulos: any[] = [];
+  
+  constructor(private articuloService: ArticuloService, private tipoArticuloService: TipoArticuloService, private proveedorService: ProveedorService, private estadoService: EstadoService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadArticulos();
     this.loadTiposArticulo();
-    this.getShopBagSize();
     this.idUser = JSON.parse(localStorage.getItem('idUser') || '{}');
   }
 
@@ -49,39 +52,37 @@ export class CatalogoComponent implements OnInit{
     return 'Cargando...';
   }
 
-  addShopBag(idArticulo: number) {
-    let data = {
-      idUsuario: this.idUser,
-      idArticulo: idArticulo,
-      cantidad: 1,
-      seleccionado: false,
-    };
-    console.log(data);
-    this.shopBagService.add(data).subscribe(
-      (response) => {
-        console.log('Artículo agregado a la cesta:', response);
-        alert('Artículo agregado a la cesta correctamente');
-      },
-      (error) => {
-        console.error('Error al agregar artículo a la cesta:', error);
-      }
-    );
+  getProveedor(id: number): string {
+    if (this.proveedores[id]) {
+      return this.proveedores[id].nombre;
+    }
+
+    this.proveedorService.getByID(id).subscribe(data => {
+      this.proveedores[id] = data; 
+    });
+    return 'Cargando...';
   }
 
-  getShopBagSize() {
-    this.shopBagService.getByID(this.idUser).subscribe(
-      (data) => {
-        this.shopBagItems = data;
-      },
-      (error) => {
-        console.error('Error al obtener ShopBag:', error);
-      }
-    );
+  getEstadoArticulo(id: number): string {
+    if (this.estadoArticulos[id]) {
+      return this.estadoArticulos[id].estado;
+    }
+
+    this.estadoService.getByID(id).subscribe(data => {
+      this.estadoArticulos[id] = data; 
+    });
+    return 'Cargando...';
   }
 
   redirectToLogin() {
     localStorage.setItem('idUser', JSON.stringify(0));
     this.router.navigate(['/login']);
+  }
+//ELIMINAR ANTES LAS CATEGORÍAS, RECORDATORIO
+  deleteArticulo(id:number) {
+    this.articuloService.delete(id).subscribe(data => {
+      this.articulos = data;
+    });
   }
 
 }

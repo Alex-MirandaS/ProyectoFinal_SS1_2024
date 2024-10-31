@@ -10,6 +10,8 @@ import { ShopBagComponent } from './pages/shop-bag/shop-bag.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ManejoProductosComponent } from './pages/manejo-productos/manejo-productos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { ManejoProductosComponent } from './pages/manejo-productos/manejo-produc
     ShopBagComponent,
     LoginComponent,
     RegisterComponent,
-    ManejoProductosComponent
+    ManejoProductosComponent,
+    HomeComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

@@ -6,8 +6,8 @@ const ShopBagService = new ShopBagS();
 // Crear un nuevo shopBag
 router.post('/shopBag', (req, res) => {
   const { idUsuario, idArticulo, cantidad, seleccionado } = req.body;
-  ShopBagService.create({ idUsuario, idArticulo, cantidad, seleccionado }, (result) => {
-    res.json({ message: 'ShopBag creado con éxito'});
+  ShopBagService.create({ idUsuario, idArticulo, cantidad, seleccionado }, (insertedId) => {
+      res.json({ message: 'ShopBag creada con éxito', id: insertedId });
   });
 });
 

@@ -17,13 +17,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a id="home" class="navbar-brand" href="">Men's Style</a>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent ">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 ">
-                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page"
-                            href="#!">Agregar Producto</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" href="#!">Perfil</a></li>
-                    <li id="orders" class="nav-item"><a id="listOrders" class="nav-link" href="#!">Pedidos</a></li>
+            <a id="home" class="navbar-brand" [routerLink]="['/admin']">Men's Style</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/manejoProductos']">Manejo de Productos</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/admin']">Reportes</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a></li>
                 </ul>
             </div>
         </div>
@@ -85,11 +84,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                                 <label for="form_need">Estado</label>
                                                 <select formControlName="idEstado" class="form-control"
                                                     required data-error="Selecciona al Proveedor del Artículo">
-                                                    <option value="" selected disabled>Selecciona el Estado del Artículo</option>
+                                                    <option value="" selected disabled>Selecciona el Estado</option>
                                                     <option *ngFor="let estado of estados" value={{estado.id}}>{{estado.estado}}</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" [formGroup]="categoriaForm">
+                                                <label for="form_need">Categoría</label>
+                                                <select formControlName="idCategoria" class="form-control"
+                                                    required data-error="Selecciona al Proveedor del Artículo">
+                                                    <option value="" selected disabled>Selecciona la Categoría</option>
+                                                    <option *ngFor="let categoria of categorias" value={{categoria.id}}>{{categoria.categoria}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="form_email">Imagen</label>

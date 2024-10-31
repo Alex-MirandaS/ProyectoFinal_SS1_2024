@@ -18,10 +18,11 @@ export class RegisterComponent implements OnInit{
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confpassword: ['', Validators.required],
       idRol: ['2', Validators.required],
+      idPasarelaPago:['', Validators.required]
     }, { validator: this.passwordMatchValidator });
   }
 
@@ -40,8 +41,13 @@ export class RegisterComponent implements OnInit{
       this.usuarioService.add(this.registerForm.value).subscribe(response => {
         alert('Usuario registrado correctamente');
         this.router.navigate(['/login']);
-        console.log('Registro exitoso', response);
-      });
+      },
+      error => {
+        alert(error.error.message || 'Error desconocido. Inténtalo de nuevo.');
+        console.error('Error al registrar el usuario', error);
+        this.router.navigate(['/register']);
+      }
+    );
     }
   }
 }

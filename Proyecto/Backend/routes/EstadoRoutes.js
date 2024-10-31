@@ -6,10 +6,14 @@ const EstadoService = new EstadoS();
 // Crear un nuevo estado
 router.post('/estado', (req, res) => {
   const { estado } = req.body;
-  EstadoService.create({ estado }, (result) => {
-    res.json({ message: 'Estado creado con éxito'});
+  EstadoService.create({ estado }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'Estado creado con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear el Estado' });
+    }
   });
-});
+}); 
 
 // Obtener todos los estados
 router.get('/estado', (req, res) => {

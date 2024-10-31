@@ -6,9 +6,13 @@ const ArticuloService = new ArticuloS();
 // Crear un nuevo articulo
 router.post('/articulo', (req, res) => {
   const { titulo, precio, imagen, descripcion, idEstado, idTipoArticulo, idUsuario, idProveedor } = req.body;
-  ArticuloService.create({ titulo, precio, imagen, descripcion, idEstado, idTipoArticulo, idUsuario, idProveedor  }, (result) => {
-    res.json({ message: 'Artículo creado con éxito'});
-  });
+  ArticuloService.create({ titulo, precio, imagen, descripcion, idEstado, idTipoArticulo, idUsuario, idProveedor  }, (insertedId) => {
+    if (insertedId) {
+        res.json({ message: 'Artículo creado con éxito', id: insertedId });
+    } else {
+        res.status(500).json({ message: 'Error al crear el artículo' });
+    }
+});
 });
 
 // Obtener todos los artículos
@@ -16,7 +20,7 @@ router.get('/articulo', (req, res) => {
   ArticuloService.getAll((articulos) => {
     res.json(articulos);
   });
-});
+}); 
 
 // Obtener un artículo por ID
 router.get('/articulo/:id', (req, res) => {

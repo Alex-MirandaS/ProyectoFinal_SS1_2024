@@ -16,19 +16,18 @@ OBJETOS/TABLAS:
 
 VISTAS:
 	-Usuario
-		-Login
-		-Registro
-		-Catalogo Digital
-		-Carrito
+		-Login (CHECK)
+		-Registro (CHECK)
+		-Catalogo Digital (CHECK)
+		-Carrito (CHECK)
 		-Cobros
 		-Inscripción de Clientes (agregar campo a usuario) / Registro
 	-Administrador
-		-Manejo de Productos (Proveedores, TipoArticulo, Categoria, Estado, Articulo)
+		-Manejo de Productos (Proveedores, TipoArticulo, Categoria, Estado, Articulo)  (CHECK)
+		-Agregar Categorias (CHECK)
 		-Red Social...
 		-Reportes
 
 Faltantes:
 	Evitar duplicacion de shopbag, solo agregar cantidad
 	Error duplicacion de username
-	Agregar RutaLogin
-	cambiar username por correo

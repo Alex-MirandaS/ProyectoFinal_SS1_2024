@@ -6,8 +6,12 @@ const CategoriaService = new CategoriaS();
 // Crear una nueva categoria
 router.post('/categoria', (req, res) => {
   const { categoria } = req.body;
-  CategoriaService.create({ categoria }, (result) => {
-    res.json({ message: 'Categoría creada con éxito'});
+  CategoriaService.create({ categoria }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'Categoría creada con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear la Categoría' });
+    }
   });
 });
 

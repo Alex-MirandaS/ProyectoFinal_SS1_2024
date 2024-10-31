@@ -5,13 +5,17 @@ import { ShopBagComponent } from './pages/shop-bag/shop-bag.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { ManejoProductosComponent } from './pages/manejo-productos/manejo-productos.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AdminComponent } from './pages/admin/admin.component';
 
 const routes: Routes = [
   { path: '', component: CatalogoComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'shopBag', component: ShopBagComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'manejoProductos', component: ManejoProductosComponent }
+  { path: 'manejoProductos', component: ManejoProductosComponent },
+  { path: 'admin', component: AdminComponent }
 ];
 
 @NgModule({

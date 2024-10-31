@@ -6,8 +6,12 @@ const RolService = new RolS();
 // Crear un nuevo rol
 router.post('/rol', (req, res) => {
   const { rol } = req.body;
-  RolService.create({ rol }, (result) => {
-    res.json({ message: 'Rol creado con éxito'});
+  RolService.create({ rol }, (insertedId) => {
+    if (insertedId) {
+      res.json({ message: 'Rol creado con éxito', id: insertedId });
+    } else {
+      res.status(500).json({ message: 'Error al crear el Rol' });
+    }
   });
 });
 
