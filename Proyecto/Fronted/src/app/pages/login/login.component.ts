@@ -29,16 +29,14 @@ export class LoginComponent implements OnInit {
       this.usuarioService.login(this.loginForm.value).subscribe(
         response => {
           let userId = response.user.id;
-          let pasarelaPagoId = response.user.idPasarelaPago;
           localStorage.setItem('idUser', JSON.stringify(userId));
-          localStorage.setItem('idPasarelaPago', JSON.stringify(pasarelaPagoId));
           this.usuarioService.getByID(userId).subscribe(
             userInfo => {
               const user: any = userInfo;
               if (user.idRol == 1) {
                 this.router.navigate(['/admin']);
               } else {
-                this.router.navigate(['/']);
+                this.router.navigate(['/home']);
               }
             },
             error => {

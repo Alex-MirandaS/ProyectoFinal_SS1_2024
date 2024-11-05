@@ -20,7 +20,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/home']">Perfil</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/home']">Ordenes</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/ordenes']">Ordenes</a></li>
                     <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a></li>
                 </ul>
                 <form class="d-flex">
@@ -37,41 +37,32 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Carrito</h2>
+                    <h2 class="heading-section">Ordenes</h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-wrap">
-                        <table class="table" *ngIf="shopBag && shopBag.length > 0">
+                        <table class="table" *ngIf="ordenes && ordenes.length > 0">
                             <thead class="thead-primary">
                                 <tr>
-                                    <th>SKU</th>
-                                    <th>Tipo Artículo</th>
-                                    <th>Nombre</th>
-                                    <th>Cantidad</th>
+                                    <th>Código</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
                                     <th>Total</th>
-                                    <th></th>
+                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody id="container">
-                                <tr *ngFor="let item of shopBag">
-                                    <th id="sku" scope="row">{{item.idArticulo}}</th>
-                                    <th id="tipoArticulo" scope="row">{{ tiposArticulo[articulos[item.idArticulo]?.idTipoArticulo]?.titulo}}</th>
-                                    <td id="nameProduct">{{articulos[item.idArticulo]?.titulo}}</td>
-                                    <td id="cantidad">{{item.cantidad}}</td>
-                                    <td id="total">{{'Q.'+(item.cantidad * articulos[item.idArticulo]?.precio)}}</td>
-                                    <td><button id="deleteProduct">Eliminar</button></td>
+                                <tr *ngFor="let item of ordenes">
+                                    <th id="sku" scope="row">{{item.id}}</th>
+                                    <th id="tipoArticulo" scope="row">{{ getFechaHora(true, item.fecha) }}</th>
+                                    <td id="nameProduct">{{ getEstadoOrden(item.idEstadoOrden) }}</td>
+                                    <td id="cantidad">{{item.total}}</td>
+                                    <td><button id="deleteProduct" class="btn btn-outline-dark" (click)="verDetalleOrden(item.id)">Ver Detalle</button></td>
                                 </tr> 
                             </tbody>
                         </table>
-
-                        <div class="d-flex " id="containerButton">
-                                <button id="buy" class="btn btn-outline-dark flex-shrink-0 " type="button " *ngIf="shopBag && shopBag.length > 0" (click)="loginPasarela()">
-                                        <i class="bi-cart-fill me-1 "></i>
-                                        ¡Comprar!
-                                    </button>
-                        </div>
                     </div>
                 </div>
             </div>

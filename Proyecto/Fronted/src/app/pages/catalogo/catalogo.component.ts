@@ -61,6 +61,7 @@ export class CatalogoComponent implements OnInit{
       (response) => {
         console.log('Artículo agregado a la cesta:', response);
         alert('Artículo agregado a la cesta correctamente');
+        this.router.navigate(['/home']);
       },
       (error) => {
         console.error('Error al agregar artículo a la cesta:', error);
@@ -69,7 +70,7 @@ export class CatalogoComponent implements OnInit{
   }
 
   getShopBagSize() {
-    this.shopBagService.getByID(this.idUser).subscribe(
+    this.shopBagService.getByID(JSON.parse(localStorage.getItem('idUser') || '{}')).subscribe(
       (data) => {
         this.shopBagItems = data;
       },
@@ -81,7 +82,6 @@ export class CatalogoComponent implements OnInit{
 
   redirectToLogin() {
     localStorage.setItem('idUser', JSON.stringify(0));
-    localStorage.setItem('idPasarelaPago', JSON.stringify(0));
     localStorage.setItem('jwt', JSON.stringify(''));
     this.router.navigate(['/login']);
   }

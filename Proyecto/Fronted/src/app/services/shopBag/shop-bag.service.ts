@@ -10,4 +10,8 @@ export class ShopBagService extends ModelService{
   constructor(http: HttpClient){
     super(http, 'shopBag')
   }
+
+  getTotal(data:any): Observable<any> {
+    return this.http.get<any>(this.apiUrl+'/total/'+data);
+  }
 }

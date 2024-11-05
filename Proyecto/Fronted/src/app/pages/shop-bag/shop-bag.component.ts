@@ -3,6 +3,7 @@ import { ArticuloService } from 'src/app/services/articuloServices/articulo.serv
 import { ShopBagService } from 'src/app/services/shopBag/shop-bag.service';
 import { TipoArticuloService } from 'src/app/services/tipoArticuloServices/tipo-articulo.service';
 import { Router } from '@angular/router';
+import { ReportesService } from 'src/app/services/reportes/reportes.service';
 @Component({
   selector: 'app-shop-bag',
   templateUrl: './shop-bag.component.html',
@@ -16,7 +17,7 @@ export class ShopBagComponent implements OnInit {
   idUser: number = 0;
   jwt: any = '';
 
-  constructor(private shopBagService: ShopBagService, private tipoArticuloService: TipoArticuloService, private articuloService: ArticuloService, private router: Router) { }
+  constructor(private shopBagService: ShopBagService, private tipoArticuloService: TipoArticuloService, private articuloService: ArticuloService, private pagarService: ReportesService, private router: Router) { }
 
   ngOnInit(): void {
     this.idUser = JSON.parse(localStorage.getItem('idUser') || '{}');
@@ -37,12 +38,12 @@ export class ShopBagComponent implements OnInit {
     );
   }
 
-  loadTiposArticulo(){
+  loadTiposArticulo() {
     this.tipoArticuloService.getAll().subscribe(
       (data) => {
         for (let index = 0; index < data.length; index++) {
           const element = data[index];
-          this.tiposArticulo[element.id] = element;          
+          this.tiposArticulo[element.id] = element;
         }
       },
       (error) => {
@@ -75,9 +76,27 @@ export class ShopBagComponent implements OnInit {
   }
 
   loginPasarela() {
-    if(this.jwt!=''){
-      
-    }else{
+    let jwt = JSON.parse(localStorage.getItem('jwt') || '""');
+    if (jwt != '') {
+      let dataPago = {
+        idUsuario: JSON.parse(localStorage.getItem('idUser') || '""'),
+        jwt: jwt
+      };
+
+      this.pagarService.pagarGetComprobante(dataPago).subscribe(response => {
+
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'comprobante.pdf'; // Nombre del archivo
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url); // Limpia el objeto URL
+        
+      });
+    } else {
       this.router.navigate(['/loginPasarela']);
     }
   }

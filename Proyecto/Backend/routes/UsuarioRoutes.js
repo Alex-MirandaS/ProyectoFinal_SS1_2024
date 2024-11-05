@@ -6,19 +6,19 @@ const { checkEmailExistence } = require('../controllers/ControlPasarelaPagos');
 
 // Crear un nuevo usuario
 router.post('/usuario', async (req, res) => {
-  const { nombre, apellido, email, password, idRol, idPasarelaPago} = req.body;
+  const { nombre, apellido, email, password, idRol, idPasarelaPago } = req.body;
   try {
     const emailExists = await checkEmailExistence(email, idPasarelaPago);
     if (emailExists.tieneCuenta) {
       const hashedPassword = await UsuarioService.getHashedPassword(password);
-      UsuarioService.create({ nombre, apellido, email, hashedPassword, idRol , idPasarelaPago}, (insertedId) => {
+      UsuarioService.create({ nombre, apellido, email, hashedPassword, idRol, idPasarelaPago }, (insertedId) => {
         if (insertedId) {
           res.json({ message: 'Usuario creado con éxito', id: insertedId });
         } else {
           res.status(500).json({ message: 'Error al crear el Usuario' });
         }
       });
-    }else{
+    } else {
       res.status(500).json({ message: 'No se puede crear un usuario si el correo no existe en la pasarela de pagos' });
     }
   } catch (error) {
@@ -85,4 +85,22 @@ router.post('/usuario/login', async (req, res) => {
       return res.status(200).json({ message: 'Inicio de sesión exitoso', user: match });
   }
 });
+
+// Obtener idPasarela con Id
+router.get('/usuario/idPasarelaPago/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const idPasarela = await UsuarioService.getIdPasarelaPagoById(id);
+
+    if (idPasarela) {
+      res.json(idPasarela);
+    } else {
+      res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+  } catch (error) {
+    console.error('Error al obtener el idPasarelaPago:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
+  }
+});
+
 module.exports = router;

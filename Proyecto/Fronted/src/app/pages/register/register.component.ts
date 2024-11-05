@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit{
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required]],
       confpassword: ['', Validators.required],
       idRol: ['2', Validators.required],
       idPasarelaPago:['', Validators.required]
@@ -31,10 +31,6 @@ export class RegisterComponent implements OnInit{
     return form.get('password')?.value === form.get('confpassword')?.value
       ? null : { 'passwordMismatch': true };
   }
-/*
-  pagosPasarelaValidator() {
-//logica de la confirmación de cuenta en la pasarela de pagos.
-  }*/
 
   onSubmit() {
     if (this.registerForm.valid) {
@@ -48,6 +44,6 @@ export class RegisterComponent implements OnInit{
         this.router.navigate(['/register']);
       }
     );
-    }
+    } 
   }
 }

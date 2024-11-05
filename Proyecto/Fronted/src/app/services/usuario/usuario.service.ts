@@ -14,4 +14,9 @@ export class UsuarioService extends ModelService{
   login(data:any): Observable<any> {
     return this.http.post<any>(this.apiUrl+'/login', data);
   }
+
+  getIdPasarelaPagobyId(data:any): Observable<any> {
+    console.log(this.apiUrl+'/idPasarelaPago/'+data);
+    return this.http.get<any>(this.apiUrl+'/idPasarelaPago/'+data);
+  }
 }

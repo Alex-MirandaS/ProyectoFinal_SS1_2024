@@ -11,6 +11,6 @@ export class OrdenService extends ModelService{
     super(http, 'orden')
   }
   getOrdenByIdUsuario(data:any): Observable<any> {
-    return this.http.get<any>(this.apiUrl+'/usuario', data);
+    return this.http.get<any>(this.apiUrl+'/usuario/'+data);
   }
 }

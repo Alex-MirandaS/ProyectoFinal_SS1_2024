@@ -17,7 +17,7 @@ class UsuarioService extends GlobalService {
     } catch (error) {
       console.error('Error al encriptar la contraseña:', error);
     }
-  } 
+  }
 
   login(email, plainPassword) {
     const query = 'SELECT * FROM Usuario WHERE email = ?';
@@ -30,15 +30,25 @@ class UsuarioService extends GlobalService {
           const hashedPassword = results[0].password;
 
           const match = await bcrypt.compare(plainPassword, hashedPassword);
-          if (match) { 
+          if (match) {
             resolve(results[0]);
           } else {
             resolve(false);
           }
         } else {
-          resolve(true); 
+          resolve(true);
         }
-      });  
+      });
+    });
+  }
+
+  getIdPasarelaPagoById(id) {
+    const query = 'SELECT idPasarelaPago FROM Usuario WHERE id = ?';
+    return new Promise((resolve, reject) => {
+      db.query(query, [id], async (err, results) => {
+        if (err) throw err;
+        resolve(results);
+      });
     });
   }
 }

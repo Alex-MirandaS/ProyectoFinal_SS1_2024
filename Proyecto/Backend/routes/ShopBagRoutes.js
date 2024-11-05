@@ -47,4 +47,13 @@ router.delete('/shopBag/:idUsuario', (req, res) => {
   });
 });
 
+// Obtener el total de los articulos del ShopBag
+router.get('/shopBag/total/:idUsuario', (req, res) => {
+  const { idUsuario } = req.params;
+  ShopBagService.getTotal(idUsuario, (total) => {
+      console.log('Resultado de Base de datos: ',total);
+      res.json(total);
+  });
+});
+
 module.exports = router;

@@ -10,10 +10,12 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { ReporteViewComponent } from './pages/reporte-view/reporte-view.component';
 import { LoginPasarelaComponent } from './pages/login-pasarela/login-pasarela.component';
+import { DetalleOrdenComponent } from './pages/detalle-orden/detalle-orden.component';
+import { OrdenComponent } from './pages/orden/orden.component';
 
 const routes: Routes = [
-  { path: '', component: CatalogoComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: CatalogoComponent },
+  { path: '', component: HomeComponent },
   { path: 'shopBag', component: ShopBagComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -21,7 +23,9 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent },
   { path: 'reportes', component: ReportesComponent },
   { path: 'reporteView', component: ReporteViewComponent },
-  { path: 'loginPasarela', component: LoginPasarelaComponent }
+  { path: 'loginPasarela', component: LoginPasarelaComponent },
+  { path: 'detalleOrden', component: DetalleOrdenComponent },
+  { path: 'ordenes', component: OrdenComponent }
 ];
 
 @NgModule({

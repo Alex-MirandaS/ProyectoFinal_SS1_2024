@@ -17,12 +17,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container px-4 px-lg-5">
-            <a id="home" class="navbar-brand" [routerLink]="['/']">Men's Style</a>
+            <a id="home" class="navbar-brand" [routerLink]="['/home']">Men's Style</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page"
-                            [routerLink]="['/']">Perfil</a></li>
-                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/']">Ordenes</a></li>
+                            [routerLink]="['/home']">Perfil</a></li>
+                    <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/home']">Ordenes</a></li>
                     <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a>
                     </li>
                 </ul>
@@ -46,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="card mt-2 mx-auto p-4 bg-light">
                     <div class="card-body bg-light">
                         <div class="container">
-                            <form id="contact-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <form id="contact-form" role="form" [formGroup]="form" (ngSubmit)="onSubmit($event)">
                                 <div class="controls">
                                     <div class="row">
                                         <div class="col-md-6">

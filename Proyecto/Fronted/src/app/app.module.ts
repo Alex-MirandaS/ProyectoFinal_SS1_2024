@@ -15,6 +15,8 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { ReportesComponent } from './pages/reportes/reportes.component';
 import { ReporteViewComponent } from './pages/reporte-view/reporte-view.component';
 import { LoginPasarelaComponent } from './pages/login-pasarela/login-pasarela.component';
+import { DetalleOrdenComponent } from './pages/detalle-orden/detalle-orden.component';
+import { OrdenComponent } from './pages/orden/orden.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LoginPasarelaComponent } from './pages/login-pasarela/login-pasarela.co
     AdminComponent,
     ReportesComponent,
     ReporteViewComponent,
-    LoginPasarelaComponent
+    LoginPasarelaComponent,
+    DetalleOrdenComponent,
+    OrdenComponent
   ],
   imports: [
     BrowserModule,
