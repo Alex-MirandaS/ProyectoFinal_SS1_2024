@@ -61,7 +61,7 @@
                                     <td id="nameProduct">{{articulos[item.idArticulo]?.titulo}}</td>
                                     <td id="cantidad">{{item.cantidad}}</td>
                                     <td id="total">{{'Q.'+(item.cantidad * articulos[item.idArticulo]?.precio)}}</td>
-                                    <td><button id="deleteProduct">Eliminar</button></td>
+                                    <td><button id="deleteProduct" class="btn btn-outline-dark" (click)="deleteItem(idUser,item.idArticulo)" >Eliminar</button></td>
                                 </tr> 
                             </tbody>
                         </table>

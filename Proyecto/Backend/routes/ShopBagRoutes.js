@@ -47,6 +47,19 @@ router.delete('/shopBag/:idUsuario', (req, res) => {
   });
 });
 
+router.delete('/shopBag/articulo/eliminar', (req, res) => {
+  const { idUsuario, idArticulo } = req.body;
+
+  ShopBagService.deleteByIdArticulo(idUsuario, idArticulo, (result) => {
+      if (result && result.message) {
+          return res.status(result.status).json({ message: result.message });
+      }
+
+      // Responde con el mensaje de éxito
+      res.status(200).json(result);
+  });
+});
+
 // Obtener el total de los articulos del ShopBag
 router.get('/shopBag/total/:idUsuario', (req, res) => {
   const { idUsuario } = req.params;

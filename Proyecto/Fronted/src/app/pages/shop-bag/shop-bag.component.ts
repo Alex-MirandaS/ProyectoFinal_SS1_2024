@@ -101,4 +101,17 @@ export class ShopBagComponent implements OnInit {
     }
   }
 
+  deleteItem(idUsuario: number, idArticulo: number) {
+    this.shopBagService.deleteByIdArticulo(idUsuario, idArticulo).subscribe(
+      response => {
+        console.log('Artículo eliminado con éxito:', response);
+        // Aquí puedes actualizar tu UI o hacer otras acciones
+      },
+      error => {
+        console.error('Error al eliminar el artículo:', error);
+        // Maneja el error, por ejemplo, mostrar un mensaje al usuario
+      }
+    );
+  }
+
 }
