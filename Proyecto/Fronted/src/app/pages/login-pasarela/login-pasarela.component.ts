@@ -24,22 +24,6 @@ export class LoginPasarelaComponent implements OnInit {
       password: ['', Validators.required],
     });
   }
-/*
-  onSubmit() {
-    if (this.registerForm.valid) {
-      this.usuarioService.add(this.registerForm.value).subscribe(response => {
-        alert('Usuario registrado correctamente');
-        this.router.navigate(['/login']);
-      },
-      error => {
-        alert(error.error.message || 'Error desconocido. Inténtalo de nuevo.');
-        console.error('Error al registrar el usuario', error);
-        this.router.navigate(['/register']);
-      }
-    );
-    } 
-  }
-*/
   onSubmit(event: Event) {
     event.preventDefault();
     if (this.form.valid) {
@@ -58,18 +42,12 @@ export class LoginPasarelaComponent implements OnInit {
           jwt: JSON.parse(localStorage.getItem('jwt') || '""')
         };
         this.pagarService.pagarGetComprobante(dataPago).subscribe(response => {
-
-          const blob = new Blob([response], { type: 'application/pdf' });
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'comprobante.pdf'; // Nombre del archivo
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          window.URL.revokeObjectURL(url); // Limpia el objeto URL
-          
-          this.router.navigate(['/ordenes']);
+          localStorage.setItem('idOrden', JSON.stringify(response.id));
+          const pdfBlob = this.base64ToBlob(response.pdf, 'application/pdf');
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          localStorage.setItem('pdfUrl', JSON.stringify(pdfUrl));
+          window.open(pdfUrl);
+          this.router.navigate(['/detalleOrden']);
         });
       },
       error => {
@@ -93,5 +71,12 @@ export class LoginPasarelaComponent implements OnInit {
         this.idPasarelaPagos = response[0]?.idPasarelaPago;
       }
     )
+  }
+
+  private base64ToBlob(base64: string, mimeType: string): Blob {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length).fill(0).map((_, i) => byteCharacters.charCodeAt(i));
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
   }
 }

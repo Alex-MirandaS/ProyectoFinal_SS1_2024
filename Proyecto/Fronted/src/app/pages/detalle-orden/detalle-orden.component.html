@@ -19,8 +19,7 @@
             <a id="home" class="navbar-brand" [routerLink]="['/home']">Men's Style</a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page"
-                            [routerLink]="['/home']">Perfil</a></li>
+                    <li class="nav-item"><a id="addProduct" class="nav-link active" aria-current="page" [routerLink]="['/home']">Perfil</a></li>
                     <li class="nav-item"><a id="perfil" class="nav-link" [routerLink]="['/ordenes']">Ordenes</a></li>
                     <li class="nav-item"><a id="perfil" class="nav-link" (click)="redirectToLogin()">Cerrar Sesion</a>
                     </li>
@@ -49,11 +48,7 @@
                                                     #{{orden.id}}</strong></p>
                                         </div>
                                         <div class="col-xl-3 float-end">
-                                            <a data-mdb-ripple-init class="btn btn-light text-capitalize border-0"
-                                                data-mdb-ripple-color="dark"><i class="fas fa-print text-primary"></i>
-                                                Print</a>
-                                            <a data-mdb-ripple-init class="btn btn-light text-capitalize"
-                                                data-mdb-ripple-color="dark"><i class="far fa-file-pdf text-danger"></i>
+                                            <a data-mdb-ripple-init class="btn btn-light text-capitalize" data-mdb-ripple-color="dark" (click)="export()"><i class="far fa-file-pdf text-danger"></i>
                                                 Export</a>
                                         </div>
                                         <hr>
@@ -70,16 +65,10 @@
                                             <div class="col-xl-4">
                                                 <p class="text-muted">Detalle de la Orden</p>
                                                 <ul class="list-unstyled">
-                                                    <li class="text-muted"><i class="fas fa-circle"
-                                                            style="color:#84B0CA ;"></i> <span
-                                                            class="fw-bold">ID: </span>#{{orden.id}}</li>
-                                                    <li class="text-muted"><i class="fas fa-circle"
-                                                            style="color:#84B0CA ;"></i> <span class="fw-bold">Fecha: </span>
-                                                        {{getFechaHora(true, orden.fecha)}}</li>
-                                                    <li class="text-muted"><i class="fas fa-circle"
-                                                            style="color:#84B0CA ;"></i> <span
-                                                            class="me-1 fw-bold">Estado:</span><span
-                                                            class="badge bg-warning text-black fw-bold">
+                                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">ID: </span>#{{orden.id}}</li>
+                                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Fecha: </span> {{getFechaHora(true, orden.fecha)}}</li>
+                                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="fw-bold">Hora: </span> {{getFechaHora(false, orden.fecha)}}</li>
+                                                    <li class="text-muted"><i class="fas fa-circle" style="color:#84B0CA ;"></i> <span class="me-1 fw-bold">Estado:</span><span class="badge bg-warning text-black fw-bold">
                                                             {{estadoOrden.estado}}</span></li>
                                                 </ul>
                                             </div>
@@ -121,9 +110,7 @@
                                         <hr>
                                         <div class="row">
                                             <div class="col-xl-2">
-                                                <button type="button" data-mdb-button-init data-mdb-ripple-init
-                                                    class="btn btn-primary text-capitalize"
-                                                    style="background-color:#60bdf3 ;" *ngIf="estadoOrden && estadoOrden.id != 1">Reintentar Pago</button>
+                                                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary text-capitalize" style="background-color:#60bdf3 ;" *ngIf="estadoOrden && estadoOrden.id != 1">Reintentar Pago</button>
                                             </div>
                                         </div>
 

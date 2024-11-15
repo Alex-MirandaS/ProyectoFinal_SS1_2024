@@ -19,11 +19,9 @@ export class ReportesService extends ModelService{
     return this.http.post<any>(this.apiUrl+'/loginPasarela', data);
   }
 
-  pagarGetComprobante(data:any): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
-    return this.http.post<Blob>(this.apiUrl + '/pagarGetComprobante', data, { responseType: 'blob' as 'json', headers });
+  pagarGetComprobante(data:any): Observable<any> {
+    console.log(this.apiUrl);
+    return this.http.post<{ pdf: string, id: number }>(this.apiUrl+'/pagarGetComprobante', data);
   }
 }
 

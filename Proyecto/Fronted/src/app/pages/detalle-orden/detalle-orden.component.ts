@@ -112,4 +112,7 @@ export class DetalleOrdenComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  export() {
+    window.open(JSON.parse(localStorage.getItem('pdfUrl') || '{}'));
+  }
 }

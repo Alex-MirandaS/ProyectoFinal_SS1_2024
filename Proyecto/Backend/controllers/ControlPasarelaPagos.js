@@ -152,7 +152,7 @@ function pagarGetComprobante(cantidad, correoReceptor, concepto, nombreTienda, i
                 // Rechazar la promesa con el código de estado y un mensaje
                 reject({
                     statusCode: res.statusCode,
-                    message: `Error HTTP ${res.statusCode}: ${res.statusMessage}`
+                    message: `Error HTTP ${res.statusCode}: ${'No tienes dinero suficiente para realizar la compra'}`
                 });
             }
         });

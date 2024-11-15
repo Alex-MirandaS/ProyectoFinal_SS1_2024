@@ -84,17 +84,12 @@ export class ShopBagComponent implements OnInit {
       };
 
       this.pagarService.pagarGetComprobante(dataPago).subscribe(response => {
-
-        const blob = new Blob([response], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'comprobante.pdf'; // Nombre del archivo
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url); // Limpia el objeto URL
-        
+        localStorage.setItem('idOrden', JSON.stringify(response.id));
+        const pdfBlob = this.base64ToBlob(response.pdf, 'application/pdf');
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        localStorage.setItem('pdfUrl', JSON.stringify(pdfUrl));
+        window.open(pdfUrl);
+        this.router.navigate(['/detalleOrden']);
       });
     } else {
       this.router.navigate(['/loginPasarela']);
@@ -104,14 +99,20 @@ export class ShopBagComponent implements OnInit {
   deleteItem(idUsuario: number, idArticulo: number) {
     this.shopBagService.deleteByIdArticulo(idUsuario, idArticulo).subscribe(
       response => {
-        console.log('Artículo eliminado con éxito:', response);
-        // Aquí puedes actualizar tu UI o hacer otras acciones
+        this.router.navigate(['/shopBag']);
+        //console.log('Artículo eliminado con éxito:', response);
       },
       error => {
         console.error('Error al eliminar el artículo:', error);
-        // Maneja el error, por ejemplo, mostrar un mensaje al usuario
       }
     );
+  }
+
+  private base64ToBlob(base64: string, mimeType: string): Blob {
+    const byteCharacters = atob(base64);
+    const byteNumbers = new Array(byteCharacters.length).fill(0).map((_, i) => byteCharacters.charCodeAt(i));
+    const byteArray = new Uint8Array(byteNumbers);
+    return new Blob([byteArray], { type: mimeType });
   }
 
 }

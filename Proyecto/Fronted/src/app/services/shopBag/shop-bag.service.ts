@@ -15,7 +15,6 @@ export class ShopBagService extends ModelService {
     return this.http.get<any>(this.apiUrl + '/total/' + data);
   }
 
-
   deleteByIdArticulo(idUsuario: number, idArticulo: number): Observable<any> {
     return this.http.delete<any>(this.apiUrl+'/articulo', {
       headers: {
